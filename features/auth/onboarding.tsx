@@ -86,7 +86,7 @@ export function Onboarding() {
         <div className="stripe-band absolute inset-x-0 bottom-0" aria-hidden="true" />
       </aside>
 
-      <main id="main" className="flex flex-col px-[var(--page-gutter)] pb-10 pt-5">
+      <main id="main" className="flex flex-col px-(--page-gutter) pb-10 pt-5">
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
           <div className="mb-8 flex items-center gap-3">
             {idx > 0 ? (

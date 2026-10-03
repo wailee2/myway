@@ -10,6 +10,7 @@ import { useHydrated } from "@/lib/store/hydrate";
 import { useSession } from "@/lib/store/session";
 import { useBooking } from "@/lib/store/booking";
 import { cn } from "@/lib/cn";
+import { PageTransition } from "./page-transition";
 import { ThemeToggle } from "./theme-toggle";
 
 type Variant = "rider" | "driver" | "operator";
@@ -115,13 +116,13 @@ export function AppShell({ variant, children }: { variant: Variant; children: Re
           </header>
 
           <main id="main" className="mx-auto w-full max-w-6xl px-[var(--page-gutter)] pb-[calc(var(--tabbar-h)+1.5rem)] pt-5 lg:pb-12 lg:pt-8">
-            {ready && onboarded ? children : <ShellSkeleton />}
+            {ready && onboarded ? <PageTransition>{children}</PageTransition> : <ShellSkeleton />}
           </main>
         </div>
       </div>
 
       {/* Mobile tab bar */}
-      <nav aria-label="Main" className="glass fixed inset-x-0 bottom-0 z-40 border-t border-line pb-[env(safe-area-inset-bottom)] lg:hidden">
+      <nav aria-label="Main" className="glass fixed inset-x-0 bottom-0 z-40 border-t border-line pb-(--safe-bottom) lg:hidden">
         <ul className="mx-auto flex max-w-lg items-start justify-between px-2 pt-2">
           {items.filter((i) => i.tab).map((i) => {
             const on = isActive(path, i.href, variant);

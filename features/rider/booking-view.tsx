@@ -7,7 +7,7 @@ import { QrCode } from "@/components/illustrations/qr-code";
 import { PageHeader } from "@/components/layout/page-header";
 import { MapCanvas } from "@/components/map/map-canvas";
 import { Button, ButtonLink } from "@/components/ui/button";
-import { Dialog, RadioCard, useDialog } from "@/components/ui/form";
+import { Dialog, RadioCard, openDialog, useDialog } from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
 import { Avatar, Badge, Banner, Card, EmptyState, SeatDots } from "@/components/ui/primitives";
 import { getLine } from "@/lib/data/bus";
@@ -162,7 +162,7 @@ function BusTicket({ b }: { b: Booking }) {
       {!cancelled && (
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <ButtonLink href={`/app/bus/${line?.id}`} variant="outline" icon="nav">Line timetable</ButtonLink>
-          <Button variant="danger" onClick={() => ref.current?.showModal()}>Cancel ticket</Button>
+          <Button variant="danger" onClick={() => openDialog(ref.current)}>Cancel ticket</Button>
         </div>
       )}
       <Dialog dialogRef={ref} title="Cancel this ticket?">
