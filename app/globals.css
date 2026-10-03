@@ -363,11 +363,11 @@
    -------------------------------------------------------------------------- */
 @layer components {
   /* Sticker: thick ink outline + hard offset shadow (brand signature) */
-  .sticker {
+  .stickern {
     border: 2.5px solid var(--outline);
     box-shadow: var(--shadow-hard);
   }
-  .sticker-lg {
+  .sticker-lgn {
     border: 3px solid var(--outline);
     box-shadow: var(--shadow-hard-lg);
   }

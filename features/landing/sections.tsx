@@ -11,7 +11,7 @@ export function BeforeAfter() {
   const before = ["Seven people in a five-seat car", "The driver stops mid-road for one more", "Price set on the spot", "No record of who drove you"];
   const after = ["Four seats, never more", "Leaves full or on time", "Price shown before you book", "Verified driver and plate number"];
   return (
-    <section aria-labelledby="ba-title" className="mx-auto max-w-7xl px-[var(--page-gutter)] py-20 lg:py-28">
+    <section aria-labelledby="ba-title" className="mx-auto max-w-7xl px-(--page-gutter) py-20 lg:py-28">
       <Eyebrow className="mb-3">The problem</Eyebrow>
       <h2 id="ba-title" className="mb-10 max-w-3xl text-display-lg">Three in front. Four in back. Still stopping for more.</h2>
       <div className="grid gap-5 lg:grid-cols-2">
@@ -67,7 +67,7 @@ export function Preview() {
     <section aria-labelledby="prev-title" className="mx-auto grid max-w-7xl items-center gap-12 px-[var(--page-gutter)] py-20 lg:grid-cols-2 lg:py-28">
       <div className="space-y-5">
         <Eyebrow>The details</Eyebrow>
-        <h2 id="prev-title" className="text-display-lg">Everything you need to know before you leave home.</h2>
+        <h2 id="prev-title" className="text-display-lg">Everything you need to know. before you leave home.</h2>
         <ul className="space-y-4">
           {([["badge", "Your driver, rated and ID-verified", "Name, photo, plate number and trip count are on the card."], ["clock", "A departure rule you can trust", "“Leaves 7:10 or when full” means exactly that."], ["fuel", "A fair, visible fare", "Fare, booking fee and fuel adjustment, itemised."]] as [IconName, string, string][]).map(([ic, t, b]) => (
             <li key={t} className="flex gap-4"><span className="grid size-11 shrink-0 place-items-center rounded-[0.875rem] bg-primary text-primary-fg"><Icon name={ic} size={22} /></span><div><h3 className="font-sans text-lg font-bold">{t}</h3><p className="text-fg-muted">{b}</p></div></li>

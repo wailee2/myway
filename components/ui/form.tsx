@@ -73,7 +73,7 @@ export function Segmented<T extends string>({ value, onChange, options, label, c
     refs.current[n]?.focus();
   };
   return (
-    <div role="tablist" aria-label={label} className={cn("inline-flex rounded-full border-2 border-outline bg-surface p-1 shadow-hard", className)}>
+    <div role="tablist" aria-label={label} className={cn("inline-flex rounded-full border-2 border-outline bg-surface p-1 ", className)}>
       {options.map((o, i) => {
         const on = o.value === value;
         return (

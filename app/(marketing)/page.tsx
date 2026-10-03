@@ -7,12 +7,12 @@ export default function LandingPage() {
   return (
     <>
       <Hero />
-      <BeforeAfter />
+      {/*<BeforeAfter />*/}
       <HowItWorks />
       <Products />
       <Preview />
       <NigeriaSection />
-      <SafetySection />
+      {/*<SafetySection />*/}
       <DriversSection />
       <Faq />
       <FinalCta />
