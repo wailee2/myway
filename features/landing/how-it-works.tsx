@@ -29,7 +29,7 @@ export function HowItWorks() {
       <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div className="space-y-3">
           <Eyebrow>How it works</Eyebrow>
-          <h2 id="how-title" className="text-display-lg">Three steps.<br />No shouting.</h2>
+          <h2 id="how-title" className="text-display-lg">Three easy steps.</h2>
         </div>
         <Segmented label="Choose who you are" value={tab} onChange={setTab} options={[{ value: "riders", label: "I’m a rider", icon: "user" }, { value: "drivers", label: "I’m a driver", icon: "car" }]} />
       </div>

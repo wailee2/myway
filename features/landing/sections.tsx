@@ -149,7 +149,7 @@ export function DriversSection() {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-[var(--page-gutter)] lg:grid-cols-2">
         <div className="space-y-6">
           <Eyebrow className="text-primary-fg/70">Drive with MYWAY</Eyebrow>
-          <h2 id="drv-title" className="text-display-lg">Drive the trip you already make.</h2>
+          <h2 id="drv-title" className="text-display-lg">Profit on the trip you already make.</h2>
           <p className="max-w-lg text-body-lg font-medium text-primary-fg/85">Post your route, sell up to four seats, and stop circling for passengers. Verify each rider’s code and get paid the same day.</p>
           <ButtonLink href="/drive/post" variant="secondary" size="lg" iconRight="arrowR">Post your first trip</ButtonLink>
         </div>
