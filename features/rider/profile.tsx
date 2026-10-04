@@ -26,8 +26,8 @@ export function Profile() {
       <section className="flex items-center gap-4" aria-label="Account">
         <Avatar name={name || "W"} size={72} tone="ink" />
         <div className="min-w-0 flex-1 space-y-1.5">
-          <h2 className="truncate font-display text-3xl font-extrabold">{name}</h2>
-          <p className="text-sm text-fg-muted">{phone || "+234 803 123 4567"}</p>
+          <h2 className="truncate font-display text-2xl font-extrabold">{name || "Rider"}</h2>
+          <p className="text-sm text-fg-muted">{phone ? `+234 ${phone}` : "+234 803 123 4567"}</p>
           <div className="flex gap-2"><Badge tone="success" icon="badge">ID verified</Badge><Badge tone="warning" icon="star">4.9</Badge></div>
         </div>
       </section>
@@ -43,7 +43,7 @@ export function Profile() {
 
       <ul className="divide-y divide-line rounded-xl border border-line bg-surface px-4">
         {menu.map(([ic, t, s, href]) => <li key={t}><Link href={href} className="block"><Row icon={ic} title={t} sub={s} right={<Icon name="chevR" size={18} className="text-fg-disabled" />} /></Link></li>)}
-        <li><button type="button" onClick={() => { signOut(); router.push("/"); }} className="block w-full text-left"><Row icon="logout" tone="danger" title="Log out" /></button></li>
+        <li><button type="button" onClick={() => { router.replace("/"); signOut(); }} className="block w-full text-left"><Row icon="logout" tone="danger" title="Log out" /></button></li>
       </ul>
     </div>
   );

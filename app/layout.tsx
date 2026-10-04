@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { bricolage, jakarta } from "./fonts";
 import { themeInitScript } from "@/lib/hooks/use-theme";
+import { PhoneFrame } from "@/components/layout/phone-frame";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -30,13 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
-        <a
-          href="#main"
-          className="sr-only z-[100] rounded-md bg-secondary px-4 py-2 font-bold text-secondary-fg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
-        >
-          Skip to content
-        </a>
-        {children}
+        <PhoneFrame>{children}</PhoneFrame>
       </body>
     </html>
   );

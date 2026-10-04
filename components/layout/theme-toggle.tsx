@@ -17,7 +17,7 @@ export function ThemeToggle({ className, withLabel }: { className?: string; with
       aria-label={`Theme: ${text[theme]}. Switch to ${text[next[theme]]}`}
       className={cn("pressable inline-flex h-11 items-center gap-2 rounded-full border-2 border-line bg-surface px-3.5 text-sm font-bold text-fg hover:bg-surface-sunken", className)}
     >
-      <Icon name={icon[theme]} size={18} />
+      <Icon name={icon[theme]} size={18} className="shrink-0" />
       {withLabel && <span>{text[theme]}</span>}
     </button>
   );

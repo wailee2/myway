@@ -28,7 +28,7 @@ export function RiderHome() {
     <div className="grid gap-5 lg:grid-cols-[26rem_1fr] lg:gap-8">
       <section aria-labelledby="home-title" className="order-2 space-y-5 lg:order-1">
         <div className="space-y-1">
-          <Eyebrow>Good morning, {name}</Eyebrow>
+          <Eyebrow>Good morning{name ? `, ${name.split(" ")[0]}` : ""}</Eyebrow>
           <h1 id="home-title" className="text-display-md">Where to today?</h1>
         </div>
         <Segmented label="Travel mode" value={mode} onChange={setMode} options={[{ value: "car", label: "Car", icon: "car" }, { value: "bus", label: "Bus", icon: "bus" }]} />

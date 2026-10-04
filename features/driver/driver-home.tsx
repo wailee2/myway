@@ -15,7 +15,7 @@ export function DriverHome() {
     <div className="grid gap-6 lg:grid-cols-[28rem_1fr] lg:gap-8">
       <section aria-labelledby="dh-title" className="space-y-5">
         <div className="flex items-start justify-between gap-3">
-          <div><Eyebrow>Good morning</Eyebrow><h1 id="dh-title" className="text-display-md">{name}</h1></div>
+          <div><Eyebrow>Good morning</Eyebrow><h1 id="dh-title" className="text-display-md">{name || "Driver"}</h1></div>
           <Badge tone={online ? "success" : "neutral"} icon={online ? "check" : undefined}>{online ? "Online" : "Offline"}</Badge>
         </div>
         {activeTrip ? (
