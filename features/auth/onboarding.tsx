@@ -51,12 +51,12 @@ export function Onboarding() {
 
   const submitPhone = () => {
     const digits = phone.replace(/\D/g, "").replace(/^0/, "");
-    if (!/^[789]\d{9}$/.test(digits)) return setError("Enter a valid number. Maximum of 10 digits");
+    if (!/^[789]\d{9}$/.test(digits)) return setError("Enter a Nigerian mobile number with 10 digits after +234, for example 803 123 4567.");
     setProfile({ phone: `+234${digits}` });
     go("otp");
   };
   const submitOtp = () => {
-    if (!/^\d{6}$/.test(otp)) return setError("Enter the 6-digit code we sent.");
+    if (!/^\d{6}$/.test(otp)) return setError("Enter the 6-digit code we sent. In this demo, any 6 digits work.");
     go("id");
   };
   const submitId = () => {
@@ -86,7 +86,7 @@ export function Onboarding() {
         <div className="stripe-band absolute inset-x-0 bottom-0" aria-hidden="true" />
       </aside>
 
-      <main id="main" className="flex flex-col px-(--page-gutter) pb-10 pt-5">
+      <main id="main" className="flex flex-col px-[var(--page-gutter)] pb-10 pt-5">
         <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
           <div className="mb-8 flex items-center gap-3">
             {idx > 0 ? (
@@ -133,7 +133,7 @@ export function Onboarding() {
             {step === "id" && (
               <form className="flex flex-1 flex-col gap-5" onSubmit={(e) => { e.preventDefault(); submitId(); }}>
                 <Heading ref={headingRef} title="Let’s confirm it’s you" body="Every rider and driver is ID-verified, so every seat is safe." />
-                <Field label="NIN" inputMode="numeric" maxLength={13} placeholder="Enter your NIN" value={nin} onChange={(e) => { setNin(e.target.value); setError(""); }} icon="badge" error={error.includes("NIN") ? error : undefined} />
+                <Field label="NIN · 11 digits" inputMode="numeric" maxLength={13} placeholder="Enter your NIN" value={nin} onChange={(e) => { setNin(e.target.value); setError(""); }} icon="badge" error={error.includes("NIN") ? error : undefined} />
                 <button type="button" onClick={() => { setSelfie(true); setError(""); }} aria-pressed={selfie} className={cn("pressable flex items-center gap-4 rounded-xl border-2 p-4 text-left", selfie ? "border-success bg-success-soft" : "border-line-strong bg-surface hover:bg-surface-sunken")}>
                   <span className="grid size-14 place-items-center rounded-full border-2 border-outline bg-surface"><Icon name={selfie ? "check" : "camera"} size={26} strokeWidth={selfie ? 3 : 2} className={selfie ? "text-success" : undefined} /></span>
                   <span className="flex-1"><span className="block font-bold">{selfie ? "Selfie captured" : "Take a quick selfie"}</span><span className="block text-sm text-fg-muted">{selfie ? "Looks good. Tap to retake." : "Good light, no sunglasses."}</span></span>

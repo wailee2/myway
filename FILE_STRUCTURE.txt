@@ -1,4 +1,4 @@
-myway/
+myway-web/
 ├── app/
 │   ├── (auth)/
 │   │   └── get-started/

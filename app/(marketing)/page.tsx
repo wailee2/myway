@@ -1,10 +1,3 @@
-import { redirect } from "next/navigation";
-
-export default function Home() {
-  redirect("/app");
-}
-
-/** 
 import { Hero } from "@/features/landing/hero";
 import { HowItWorks } from "@/features/landing/how-it-works";
 import { Faq } from "@/features/landing/faq";
@@ -14,15 +7,15 @@ export default function LandingPage() {
   return (
     <>
       <Hero />
-      /*<BeforeAfter />
+      <BeforeAfter />
       <HowItWorks />
       <Products />
       <Preview />
       <NigeriaSection />
-      /*<SafetySection />
+      <SafetySection />
       <DriversSection />
       <Faq />
       <FinalCta />
     </>
   );
-}*/
+}

@@ -41,11 +41,12 @@ export function HeroWidget() {
   return (
     <form
       onSubmit={(e) => { e.preventDefault(); router.push(`/app/search?from=${from}&to=${to}&seat=${seat}`); }}
-      className="sticker-lg w-full max-w-md space-y-4 rounded-2xl bg-surface p-5 sm:p-8 sm:px-10 lg:max-w-none"
+      className="sticker-lg w-full max-w-md space-y-4 rounded-2xl bg-surface p-5 sm:p-6 lg:max-w-none"
       aria-label="Find a seat"
     >
       <div className="flex items-center justify-between">
         <h2 className="font-display text-xl font-extrabold">Find your seat</h2>
+        <Badge tone="success" icon="check">{trips.length ? `${trips.length} cars today` : "Request a route"}</Badge>
       </div>
       <div className="space-y-2.5">
         {[{ label: "From", id: "hw-from", value: from, set: setFrom, ids: FROM, icon: "pin" as const }, { label: "To", id: "hw-to", value: to, set: setTo, ids: TO, icon: "flag" as const }].map((f) => (
@@ -59,7 +60,7 @@ export function HeroWidget() {
           </div>
         ))}
       </div>
-      <div className='hidden'>
+      <div>
         <p className="mb-2 text-caption font-extrabold uppercase tracking-[0.14em] text-fg-muted">Choose a seat · max four per car</p>
         <div className="flex items-center gap-2">
           <span aria-hidden="true" className="grid h-14 w-12 place-items-center rounded-[0.9rem] bg-secondary text-primary"><Icon name="car" size={20} /></span>
@@ -71,6 +72,7 @@ export function HeroWidget() {
         </div>
       </div>
       <Button type="submit" size="lg" full iconRight="arrowR">Find seats · {formatNaira(price)}</Button>
+      <p className="text-center text-sm text-fg-muted">Price shown before you book. Fuel adjustment and booking fee added at checkout.</p>
     </form>
   );
 }

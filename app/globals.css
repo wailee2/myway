@@ -1,22 +1,16 @@
 @import "tailwindcss";
 
-
-/* --------------------------------------------------------------------------
-   0. PHONE-SCREEN BREAKPOINTS
-   The app lives inside a 390px "screen" on desktop, so viewport media queries
-   would wrongly switch to the desktop layout. sm/md/lg/xl/2xl now respond to
-   the width of the nearest `screen` container (see .phone-screen below), so the
-   phone always renders the mobile layout, on desktop and on a real phone.
-   -------------------------------------------------------------------------- */
-@theme {
-  --breakpoint-*: initial;
-}
-@custom-variant sm (@container screen (min-width: 40rem));
-@custom-variant md (@container screen (min-width: 48rem));
-@custom-variant lg (@container screen (min-width: 64rem));
-@custom-variant xl (@container screen (min-width: 80rem));
-@custom-variant 2xl (@container screen (min-width: 96rem));
-
+/* ==========================================================================
+   MYWAY DESIGN SYSTEM  ·  single source of truth
+   --------------------------------------------------------------------------
+   1. :root          raw design tokens: static, then LIGHT, then DARK (OS or forced via data-theme)
+   2. @theme inline  maps tokens to Tailwind v4 utilities (bg-primary, text-fg-muted…)
+   3. @theme         non-colour scales: type, radius, shadow, motion, animation
+   4. @layer base    resets, focus ring, selection, reduced motion
+   5. @layer components  a few repeated patterns (sticker, stripe band, map)
+   Theme switching: <html data-theme="light|dark"> forces a theme. With no
+   attribute the user's OS setting wins (color-scheme: light dark).
+   ========================================================================== */
 
 /* Opt the `dark:` variant into the data-theme switch (rarely needed: tokens flip on their own). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
@@ -293,19 +287,12 @@
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
   /* Named animations (utilities: animate-rise, animate-fade, animate-pop, animate-drive) */
-  --animate-rise: rise 320ms var(--ease-out-strong) backwards;
-  --animate-fade: fade 200ms ease-out backwards;
-  --animate-pop: pop 220ms var(--ease-out-strong) backwards;
+  --animate-rise: rise 320ms var(--ease-out-strong) both;
+  --animate-fade: fade 200ms ease-out both;
+  --animate-pop: pop 220ms var(--ease-out-strong) both;
   --animate-drive: drive 14s linear infinite;
   --animate-spin-wheel: spin-wheel 1.1s linear infinite;
   --animate-pulse-ring: pulse-ring 1.8s var(--ease-out-strong) infinite;
-  --animate-push: push 380ms var(--ease-drawer) backwards;
-  --animate-pop-back: pop-back 320ms var(--ease-drawer) backwards;
-  --animate-sheet: sheet 380ms var(--ease-drawer) backwards;
-  --animate-logo-pop: logo-pop 700ms var(--ease-out-strong) 100ms backwards;
-  --animate-draw: draw 650ms var(--ease-in-out-strong) 450ms backwards;
-  --animate-splash-drive: splash-drive 2s cubic-bezier(0.45, 0, 0.25, 1) 150ms backwards;
-  --animate-splash-out: splash-out 450ms var(--ease-in-out-strong) forwards;
 
   @keyframes rise {
     from { opacity: 0; transform: translateY(10px); }
@@ -321,39 +308,10 @@
   }
   @keyframes drive {
     from { transform: translateX(-130%); }
-    to { transform: translateX(100cqw); }
+    to { transform: translateX(100vw); }
   }
   @keyframes spin-wheel {
     to { transform: rotate(360deg); }
-  }
-  /* iOS-style push (new screen slides in from the right) and pop (back) */
-  @keyframes push {
-    from { opacity: 0; transform: translateX(32px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes pop-back {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes sheet {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-  @keyframes logo-pop {
-    0% { opacity: 0; transform: scale(0.5) rotate(-8deg); }
-    60% { opacity: 1; transform: scale(1.08) rotate(1deg); }
-    100% { opacity: 1; transform: scale(1) rotate(0); }
-  }
-  @keyframes draw {
-    from { stroke-dashoffset: 1; }
-    to { stroke-dashoffset: 0; }
-  }
-  @keyframes splash-drive {
-    from { transform: translateX(-150%); }
-    to { transform: translateX(100cqw); }
-  }
-  @keyframes splash-out {
-    to { opacity: 0; transform: scale(1.08); }
   }
   @keyframes pulse-ring {
     0% { transform: scale(0.8); opacity: 0.8; }
@@ -416,11 +374,11 @@
    -------------------------------------------------------------------------- */
 @layer components {
   /* Sticker: thick ink outline + hard offset shadow (brand signature) */
-  .stickern {
+  .sticker {
     border: 2.5px solid var(--outline);
     box-shadow: var(--shadow-hard);
   }
-  .sticker-lgn {
+  .sticker-lg {
     border: 3px solid var(--outline);
     box-shadow: var(--shadow-hard-lg);
   }
@@ -436,7 +394,7 @@
 
   /* Staggered entrance: set style="--i: n" on children */
   .stagger > * {
-    animation: rise 320ms var(--ease-out-strong) backwards;
+    animation: rise 320ms var(--ease-out-strong) both;
     animation-delay: calc(var(--i, 0) * 50ms);
   }
 
@@ -468,102 +426,3 @@
   background: color-mix(in srgb, var(--surface) 78%, transparent);
   backdrop-filter: blur(18px) saturate(160%);
 }
-
-
-/* --------------------------------------------------------------------------
-   6. PHONE FRAME  (iPhone 13/14: 390 x 844 pt screen, 47pt status bar, 34pt home indicator)
-   Desktop / tablet: a framed phone centred on a white (light) or near-black (dark) stage.
-   Real phones: no frame, the app is full-bleed and respects the device safe areas.
-   -------------------------------------------------------------------------- */
-:root {
-  --stage-bg: #ffffff;
-  --phone-ring: #2b2b2e;
-  --phone-glow: rgb(0 0 0 / 0);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --stage-bg: #0a0a0a; --phone-ring: #46464b; --phone-glow: rgb(255 255 255 / 0.05); }
-}
-:root[data-theme="dark"] { --stage-bg: #0a0a0a; --phone-ring: #46464b; --phone-glow: rgb(255 255 255 / 0.05); }
-
-.stage {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background: var(--stage-bg);
-}
-.phone { position: relative; width: 100%; height: 100%; }
-
-.phone-screen {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: var(--background);
-  color: var(--text-primary);
-  /* `screen` is the container the sm/md/lg breakpoints measure. Container + layout containment
-     also makes position:fixed children (tab bar, sheets, SOS) fill the screen, not the browser. */
-  container: screen / inline-size;
-  isolation: isolate;
-  transform: translateZ(0);
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --screen-h: calc(100dvh - var(--safe-top));
-  --tabbar-h: calc(4.5rem + var(--safe-bottom));
-  --chrome-fg: var(--text-primary);
-  --chrome-bg: var(--background);
-}
-/* Driver app is forced dark: make the status bar and home indicator follow it. */
-.phone-screen:has([data-theme="dark"]) { --chrome-fg: #f7f4ea; --chrome-bg: #0d0d0d; }
-/* During the splash the chrome sits on the yellow launch screen. */
-.phone-screen[data-splash="on"] { --chrome-fg: #0d0d0d; --chrome-bg: transparent; }
-
-.phone-top {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 120;
-  height: var(--safe-top);
-  background: var(--chrome-bg);
-  color: var(--chrome-fg);
-  pointer-events: none;
-  transition: background-color 300ms ease;
-}
-.phone-top .sb, .phone-notch, .home-indicator, .phone-btn { display: none; }
-
-.screen-scroll {
-  position: absolute;
-  inset: var(--safe-top) 0 0 0;
-  overflow-x: clip;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
-  scroll-padding-top: calc(var(--header-h) + 1rem);
-  scrollbar-width: none;
-}
-.screen-scroll::-webkit-scrollbar { display: none; }
-@media (prefers-reduced-motion: no-preference) {
-  .screen-scroll { scroll-behavior: smooth; }
-}
-/* `min-h-dvh` means "the screen", not "the browser window" */
-.screen-scroll .min-h-dvh { min-height: var(--screen-h); }
-
-/* Framed (desktop / tablet): plain phone-width column, like the reference */
-@media (min-width: 520px) {
-  .phone {
-    --frame-h: min(900px, calc(100dvh - 40px));
-    width: 430px;
-    height: var(--frame-h);
-    border-radius: 40px;
-    box-shadow:
-      0 0 0 1px rgb(0 0 0 / 0.06),
-      0 40px 80px -30px rgb(0 0 0 / 0.30),
-      0 12px 24px -10px rgb(0 0 0 / 0.15);
-  }
-  .phone-screen {
-    border-radius: 40px;
-    --screen-h: var(--frame-h);
-  }
-}
-
-

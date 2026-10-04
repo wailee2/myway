@@ -73,7 +73,7 @@ export function Segmented<T extends string>({ value, onChange, options, label, c
     refs.current[n]?.focus();
   };
   return (
-    <div role="tablist" aria-label={label} className={cn("inline-flex rounded-full border-2 border-outline bg-surface p-1 ", className)}>
+    <div role="tablist" aria-label={label} className={cn("inline-flex rounded-full border-2 border-outline bg-surface p-1 shadow-hard", className)}>
       {options.map((o, i) => {
         const on = o.value === value;
         return (
@@ -127,19 +127,10 @@ export function RadioCard({ checked, onSelect, icon, title, sub, name }: { check
   );
 }
 
-/* ---------- Confirm sheet (<dialog>) ----------
- * Deliberately NOT showModal(): a modal dialog renders in the browser's top layer and would escape
- * the phone frame. A non-modal dialog with `fixed inset-0` stays inside the screen. We re-add the
- * bits showModal gave us for free: focus on open, Esc to close, scrim tap to close. */
-export function openDialog(el: HTMLDialogElement | null | undefined) {
-  if (!el) return;
-  el.show();
-  el.querySelector<HTMLElement>("button")?.focus();
-}
-
+/* ---------- Native <dialog> confirm ---------- */
 export function useDialog() {
   const ref = useRef<HTMLDialogElement>(null);
-  return { ref, open: () => openDialog(ref.current), close: () => ref.current?.close() };
+  return { ref, open: () => ref.current?.showModal(), close: () => ref.current?.close() };
 }
 
 export function Dialog({ dialogRef, title, children }: { dialogRef: React.RefObject<HTMLDialogElement | null>; title: string; children: ReactNode }) {
@@ -147,15 +138,11 @@ export function Dialog({ dialogRef, title, children }: { dialogRef: React.RefObj
     <dialog
       ref={dialogRef}
       aria-labelledby="dialog-title"
-      className="fixed inset-0 z-[80] m-0 hidden h-full max-h-none w-full max-w-none items-end border-0 bg-overlay p-0 text-fg open:flex open:animate-fade"
+      className="m-auto w-[min(92vw,26rem)] rounded-xl border-2 border-outline bg-surface p-6 text-fg shadow-hard-lg open:animate-pop"
       onClick={(e) => { if (e.target === e.currentTarget) e.currentTarget.close(); }}
-      onKeyDown={(e) => { if (e.key === "Escape") e.currentTarget.close(); }}
     >
-      <div className="w-full animate-sheet rounded-t-2xl border-t-2 border-outline bg-surface p-6 pb-[calc(1.5rem+var(--safe-bottom))]">
-        <div aria-hidden="true" className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-line-strong/30" />
-        <h2 id="dialog-title" className="mb-3 text-title">{title}</h2>
-        {children}
-      </div>
+      <h2 id="dialog-title" className="mb-3 text-title">{title}</h2>
+      {children}
     </dialog>
   );
 }

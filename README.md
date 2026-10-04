@@ -19,7 +19,7 @@ This is a **front-end MVP**: it shows how MYWAY would look and behave as a finis
 **Requirements:** Node.js **20.9+** (22 LTS recommended; an `.nvmrc` is included) and npm 10+.
 
 ```bash
-unzip myway.zip && cd myway
+unzip myway-web.zip && cd myway-web
 npm install
 npm run dev          # http://localhost:3000
 ```
@@ -177,4 +177,3 @@ Conventions: route files stay thin; all UI lives in `features/*` or `components/
 | Stuck on `/get-started` after reload | Onboarding state lives in `localStorage`; complete it once, or check that storage is not blocked. |
 | Build fails fetching fonts | You are offline. Switch `app/fonts.ts` to `next/font/local`. |
 | Wrong theme colours | Remove the `data-theme` attribute or clear the `myway.theme` key in `localStorage`. |
-"# myway" 

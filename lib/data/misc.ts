@@ -20,4 +20,5 @@ export const FAQ = [
   { q: "Can I pay with cash?", a: "Yes. Choose cash and a small hold is taken from your wallet to secure the seat. You can also pay by wallet, bank transfer or card." },
   { q: "What if my driver does not show up?", a: "You are refunded to your wallet automatically and we offer the next car or bus on your route." },
   { q: "How do drivers earn?", a: "Drivers post trips they already make, sell up to four seats, and get paid daily. MYWAY keeps a commission per seat and adds fuel cashback." },
+  { q: "Is this a real product yet?", a: "Not yet. This is an MVP that shows how MYWAY will look and work. Bookings, drivers and payments here are simulated." },
 ];
