@@ -24,11 +24,11 @@ export function Cta({ children, ...rest }: React.ComponentProps<typeof Button>) 
 }
 
 /* ---------- Phone number ---------- */
-export function PhoneStep({ headingRef, title, body, phone, setPhone, error, onSubmit, cta }: {
+export function PhoneStep({ headingRef, title, body, phone, setPhone, error, onSubmit, cta, footer }: {
   headingRef: React.RefObject<HTMLHeadingElement | null>;
   title: string; body: string;
   phone: string; setPhone: (v: string) => void;
-  error: string; onSubmit: () => void; cta: string;
+  error: string; onSubmit: () => void; cta: string; footer?: React.ReactNode;
 }) {
   return (
     <form className="flex flex-1 flex-col gap-6" onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
@@ -48,6 +48,7 @@ export function PhoneStep({ headingRef, title, body, phone, setPhone, error, onS
       />
       <p className="text-sm text-fg-muted">Just type the digits, no spaces needed.</p>
       <Cta type="submit">{cta}</Cta>
+      {footer}
     </form>
   );
 }

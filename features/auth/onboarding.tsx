@@ -30,6 +30,7 @@ export function Onboarding() {
   const router = useRouter();
   const ready = useHydrated();
   const register = useSession((s) => s.register);
+  const hasAccount = useSession((s) => s.hasAccount);
   const onboarded = useSession((s) => s.onboarded);
   const savedRole = useSession((s) => s.role);
   const [step, setStep] = useState<Step>("role");
@@ -61,6 +62,7 @@ export function Onboarding() {
   const submitPhone = () => {
     const bad = checkPhone(phone);
     if (bad) return setError(bad);
+    if (hasAccount(nationalPhone(phone)!)) return setError("That number already has an account. Log in instead.");
     go("otp");
   };
   const submitOtp = () => {
@@ -68,7 +70,7 @@ export function Onboarding() {
     go("id");
   };
   const submitId = () => {
-    if (name.trim().length < 2) return setError("name:Enter your full name as it appears on your NIN.");
+    if (name.trim().length < 2) return setError(role === "operator" ? "name:Enter your company name." : "name:Enter your full name as it appears on your NIN.");
     if (nin.length !== NIN_LEN) return setError(`nin:A NIN has ${NIN_LEN} digits. You’ve entered ${nin.length}.`);
     if (!selfie) return setError("Take a quick selfie so we can match it to your ID.");
     go("location");
@@ -98,7 +100,7 @@ export function Onboarding() {
         <div key={step} className="animate-rise flex flex-1 flex-col gap-6">
           {step === "role" && (
             <>
-              <Heading ref={headingRef} title="How do you want to move?" body="You can switch between apps any time." />
+              <Heading ref={headingRef} title="How do you want to move?" body="Pick the one that fits. You can open another account with a different number any time." />
               <div role="radiogroup" aria-label="Choose your role" className="grid gap-3">
                 {ROLES.map((r) => {
                   const on = role === r.id;
@@ -119,7 +121,7 @@ export function Onboarding() {
           )}
 
           {step === "phone" && (
-            <PhoneStep headingRef={headingRef} title="What’s your number?" body="We’ll text a 6-digit code. Everyone on MYWAY is verified, riders and drivers." phone={phone} setPhone={(v) => { setPhone(v); setError(""); }} error={error} onSubmit={submitPhone} cta="Send code" />
+            <PhoneStep headingRef={headingRef} title="What’s your number?" body="We’ll text a 6-digit code. Everyone on MYWAY is verified, riders and drivers." phone={phone} setPhone={(v) => { setPhone(v); setError(""); }} error={error} onSubmit={submitPhone} cta="Send code" footer={<p className="text-center text-sm font-semibold text-fg-muted">Already registered? <Link href="/login" className="font-extrabold text-fg underline underline-offset-4">Log in</Link></p>} />
           )}
 
           {step === "otp" && <OtpStep headingRef={headingRef} phone={phone} otp={otp} setOtp={(v) => { setOtp(v); setError(""); }} error={error} onSubmit={submitOtp} note="Demo: any 6 digits will work." />}
@@ -127,7 +129,7 @@ export function Onboarding() {
           {step === "id" && (
             <form className="flex flex-1 flex-col gap-5" onSubmit={(e) => { e.preventDefault(); submitId(); }}>
               <Heading ref={headingRef} title="Let’s confirm it’s you" body="Every rider and driver is ID-verified, so every seat is safe." />
-              <Field label="Full name" autoComplete="name" maxLength={40} placeholder="As on your NIN" value={name} onChange={(e) => { setName(e.target.value); setError(""); }} icon="user" error={fieldError("name")} />
+              <Field label={role === "operator" ? "Company name" : "Full name"} autoComplete="name" maxLength={40} placeholder={role === "operator" ? "e.g. Cityline Coaches" : "As on your NIN"} value={name} onChange={(e) => { setName(e.target.value); setError(""); }} icon="user" error={fieldError("name")} />
               <Field
                 label="NIN"
                 type="text"

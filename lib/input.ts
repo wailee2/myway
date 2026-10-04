@@ -17,3 +17,9 @@ export function nationalPhone(value: string) {
   const d = value.replace(/\D/g, "").replace(/^0/, "");
   return /^[789]\d{9}$/.test(d) ? d : null;
 }
+
+/** "8011111111" -> "+234 801 111 1111" */
+export function formatPhone(national: string) {
+  const d = national.replace(/\D/g, "").replace(/^0/, "");
+  return d.length === 10 ? `+234 ${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6)}` : d ? `+234 ${d}` : "";
+}

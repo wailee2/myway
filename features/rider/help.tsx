@@ -8,12 +8,12 @@ import { Icon } from "@/components/ui/icon";
 import { EmptyState } from "@/components/ui/primitives";
 import { FAQ } from "@/lib/data/misc";
 
-export function Help() {
+export function Help({ faq = FAQ, back = "/app/profile" }: { faq?: { q: string; a: string }[]; back?: string }) {
   const [q, setQ] = useState("");
-  const list = FAQ.filter((f) => (f.q + f.a).toLowerCase().includes(q.trim().toLowerCase()));
+  const list = faq.filter((f) => (f.q + f.a).toLowerCase().includes(q.trim().toLowerCase()));
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <PageHeader title="Help and support" back="/app/profile" />
+      <PageHeader title="Help and support" back={back} />
       <Field label="Search help" icon="search" placeholder="e.g. refund" value={q} onChange={(e) => setQ(e.target.value)} />
       <div className="grid gap-3 sm:grid-cols-2"><ButtonLink href="mailto:help@myway.example" icon="chat">Chat with us</ButtonLink><ButtonLink href="tel:+2340000000000" variant="outline" icon="phone">Call</ButtonLink></div>
       <h2 className="font-sans text-caption font-extrabold uppercase tracking-[0.14em] text-fg-muted">Popular questions</h2>

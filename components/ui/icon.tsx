@@ -2,6 +2,7 @@ import type { ReactNode, SVGProps } from "react";
 
 /** Stroke icon set (24px grid, 2px stroke). Add a new icon by adding a key here. */
 export const iconPaths = {
+  edit: <path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z" />,
   arrowR: <path d="M5 12h14M12 5l7 7-7 7" />,
   arrowL: <path d="M19 12H5M12 19l-7-7 7-7" />,
   arrowUpRight: <path d="M7 17L17 7M8 7h9v9" />,

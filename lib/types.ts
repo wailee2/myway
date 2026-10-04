@@ -87,7 +87,7 @@ export interface Transaction {
 
 export interface AppNotification {
   id: string;
-  icon: "car" | "bus" | "wallet" | "star" | "route";
+  icon: "car" | "bus" | "wallet" | "star" | "route" | "users" | "bank" | "shield" | "doc" | "alert" | "scan" | "trend";
   title: string;
   body: string;
   time: string;

@@ -39,6 +39,7 @@ interface BookingState {
   topUp: (amount: number) => void;
   spend: (amount: number, title: string, icon: Transaction["icon"]) => boolean;
   markAllRead: () => void;
+  markRead: (id: string) => void;
 }
 
 const SEED_BOOKINGS: Booking[] = [
@@ -123,6 +124,7 @@ export const useBooking = create<BookingState>()(
         set((s) => ({ balance: s.balance - amount, transactions: [{ id: makeId("x"), title, sub: "Today", amount: -amount, icon }, ...s.transactions] }));
         return true;
       },
+      markRead: (id) => set((s) => ({ notifications: s.notifications.map((n) => (n.id === id ? { ...n, unread: false } : n)) })),
       markAllRead: () => set((s) => ({ notifications: s.notifications.map((n) => ({ ...n, unread: false })) })),
     }),
     { name: "myway.booking", skipHydration: true, version: 1 },

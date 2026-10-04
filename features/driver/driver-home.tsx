@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MapCanvas } from "@/components/map/map-canvas";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Badge, Card, Eyebrow, Progress } from "@/components/ui/primitives";
@@ -36,7 +35,6 @@ export function DriverHome() {
           <Progress value={65} label="Weekly bonus progress" />
           <p className="text-sm text-fg-muted">Complete 8 more trips to unlock it.</p>
         </Card>
-        <Link href="/app" className="block text-center text-sm font-bold text-fg-muted underline">Switch to rider app</Link>
       </section>
       <div className="relative h-72 overflow-hidden rounded-2xl border-2 border-line lg:sticky lg:top-8 lg:h-[calc(100dvh-7rem)]">
         <MapCanvas route={null} markers={[{ x: 70, y: 150, kind: "demand", label: "8" }, { x: 210, y: 250, kind: "demand", label: "14" }, { x: 300, y: 190, kind: "demand", label: "5" }, { x: 190, y: 340, kind: "me" }]} label="Map of rider demand near your route" />

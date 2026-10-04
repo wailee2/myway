@@ -9,6 +9,7 @@ import { Avatar, Badge, Banner, Card, EmptyState, Row } from "@/components/ui/pr
 import { stopName } from "@/lib/data/stops";
 import { formatCountdown, formatNaira } from "@/lib/format";
 import { useCountdown } from "@/lib/hooks/use-countdown";
+import { useAlerts } from "@/lib/store/alerts";
 import { useDriver } from "@/lib/store/driver";
 
 const RIDERS = [
@@ -20,6 +21,7 @@ const RIDERS = [
 export function LiveTrip() {
   const router = useRouter();
   const { activeTrip, endTrip } = useDriver();
+  const push = useAlerts((s) => s.push);
   const left = useCountdown(372);
   const [filled, setFilled] = useState(1);
   const [boarded, setBoarded] = useState<string[]>([]);
@@ -83,7 +85,7 @@ export function LiveTrip() {
       {!started ? (
         <Button size="lg" full icon="nav" onClick={() => setStarted(true)} disabled={boarded.length === 0}>Start trip</Button>
       ) : (
-        <Button size="lg" full variant="outline" onClick={() => { endTrip(); router.push("/drive/earnings"); }}>End trip · earn {formatNaira(3600)}</Button>
+        <Button size="lg" full variant="outline" onClick={() => { endTrip(); push("driver", { icon: "wallet", title: "Trip complete", body: `${formatNaira(3600)} added to your balance.` }); router.push("/drive/earnings"); }}>End trip · earn {formatNaira(3600)}</Button>
       )}
     </div>
   );

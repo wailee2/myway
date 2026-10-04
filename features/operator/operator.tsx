@@ -2,28 +2,34 @@
 
 import { useState } from "react";
 import { PageHeader } from "@/components/layout/page-header";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Avatar, Badge, Banner, Card, Progress, Row } from "@/components/ui/primitives";
 import { formatNaira } from "@/lib/format";
+import { useOperator } from "@/lib/store/operator";
+import { useSession } from "@/lib/store/session";
 import { cn } from "@/lib/cn";
 
 export function OperatorDashboard() {
-  const trips = [{ id: "N1", route: "Nyanya → CBD", time: "7:30", sold: 16 }, { id: "K2", route: "Kubwa → Wuse II", time: "7:45", sold: 9 }, { id: "L3", route: "Lugbe → Garki", time: "8:00", sold: 4 }];
+  const { trips, buses } = useOperator();
+  const name = useSession((st) => st.name);
+  const sold = trips.reduce((a, t) => a + t.sold, 0);
+  const revenue = trips.reduce((a, t) => a + t.sold * t.fare, 0);
+  const out = buses.filter((b) => b.status === "on-route").length;
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <PageHeader title="Cityline Coaches" sub="Operator console" />
-      <div className="grid gap-3 sm:grid-cols-3">
-        {[["214", "Seats sold today", true], [formatNaira(149800), "Revenue", false], ["9 / 12", "Buses out", false]].map(([v, l, p]) => <Card key={l as string} tone={p ? "primary" : "default"}><p className="font-display text-4xl font-extrabold tracking-[-0.03em]">{v}</p><p className="text-sm font-semibold opacity-80">{l}</p></Card>)}
+      <PageHeader title={name || "Operator console"} sub="Operator console" />
+      <div className="grid grid-cols-2 gap-3">
+        {[[String(sold), "Seats sold today", true], [formatNaira(revenue), "Revenue", false], [`${out} / ${buses.length}`, "Buses out", false]].map(([v, l, p], i) => <Card key={l as string} tone={p ? "primary" : "default"} className={cn(i === 0 && "col-span-2")}><p className="font-display text-3xl font-extrabold tracking-[-0.03em]">{v}</p><p className="text-sm font-semibold opacity-80">{l}</p></Card>)}
       </div>
       <section aria-labelledby="today" className="space-y-3"><h2 id="today" className="font-sans text-caption font-extrabold uppercase tracking-[0.14em] text-fg-muted">Today’s trips</h2>
-        <ul className="grid gap-3 md:grid-cols-2">
+        <ul className="grid gap-3">
           {trips.map((t) => (
-            <li key={t.id}><Card className="space-y-3"><div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-[0.8rem] bg-secondary font-display font-extrabold text-primary">{t.id}</span><div className="flex-1"><p className="font-bold">{t.route}</p><p className="text-sm text-fg-muted">{t.sold} of 18 seats sold</p></div><p className="font-display text-2xl font-extrabold">{t.time}</p></div><Progress value={(t.sold / 18) * 100} tone={t.sold / 18 > 0.7 ? "success" : "primary"} label={`${t.route} seats sold`} /></Card></li>
+            <li key={t.id}><Card className="space-y-3"><div className="flex items-center gap-3"><span className="grid size-11 shrink-0 place-items-center rounded-[0.8rem] bg-secondary font-display font-extrabold text-primary">{t.line}</span><div className="min-w-0 flex-1"><p className="font-bold leading-snug">{t.route}</p><p className="text-sm text-fg-muted">{t.sold} of {t.seats} seats sold</p></div><p className="shrink-0 font-display text-xl font-extrabold">{t.time}</p></div><Progress value={(t.sold / t.seats) * 100} tone={t.sold / t.seats > 0.7 ? "success" : "primary"} label={`${t.route} seats sold`} /></Card></li>
           ))}
         </ul>
       </section>
-      <Button icon="plus" size="lg">Add trip</Button>
+      <ButtonLink href="/operator/trips/new" icon="plus" size="lg" full>Add trip</ButtonLink>
     </div>
   );
 }

@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAlerts } from "./alerts";
 import { useBooking } from "./booking";
+import { useOperator } from "./operator";
 import { useDriver } from "./driver";
 import { useSession } from "./session";
 
@@ -10,7 +12,7 @@ export function useHydrated() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     let alive = true;
-    Promise.all([useSession.persist.rehydrate(), useBooking.persist.rehydrate(), useDriver.persist.rehydrate()]).then(() => {
+    Promise.all([useSession.persist.rehydrate(), useBooking.persist.rehydrate(), useDriver.persist.rehydrate(), useAlerts.persist.rehydrate(), useOperator.persist.rehydrate()]).then(() => {
       if (alive) setReady(true);
     });
     return () => {

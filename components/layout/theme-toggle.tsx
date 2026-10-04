@@ -1,24 +1,22 @@
 "use client";
 
-import { useTheme, type Theme } from "@/lib/hooks/use-theme";
-import { Icon, type IconName } from "@/components/ui/icon";
+import { useResolvedTheme } from "@/lib/hooks/use-theme";
+import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/cn";
 
-const next: Record<Theme, Theme> = { system: "light", light: "dark", dark: "system" };
-const icon: Record<Theme, IconName> = { system: "sliders", light: "sun", dark: "moon" };
-const text: Record<Theme, string> = { system: "Match device", light: "Light", dark: "Dark" };
-
-export function ThemeToggle({ className, withLabel }: { className?: string; withLabel?: boolean }) {
-  const { theme, setTheme } = useTheme();
+/** One-tap light/dark switch. Shows the mode you'll switch *to* (sun while dark, moon while light). */
+export function ThemeToggle({ className, withLabel, fallback }: { className?: string; withLabel?: boolean; fallback?: "light" | "dark" }) {
+  const { mode, toggle } = useResolvedTheme(fallback);
+  const next = mode === "dark" ? "light" : "dark";
   return (
     <button
       type="button"
-      onClick={() => setTheme(next[theme])}
-      aria-label={`Theme: ${text[theme]}. Switch to ${text[next[theme]]}`}
+      onClick={toggle}
+      aria-label={`Switch to ${next} mode`}
       className={cn("pressable inline-flex h-11 items-center gap-2 rounded-full border-2 border-line bg-surface px-3.5 text-sm font-bold text-fg hover:bg-surface-sunken", className)}
     >
-      <Icon name={icon[theme]} size={18} className="shrink-0" />
-      {withLabel && <span>{text[theme]}</span>}
+      <Icon name={mode === "dark" ? "sun" : "moon"} size={18} className="shrink-0" />
+      {withLabel && <span>{next === "light" ? "Light mode" : "Dark mode"}</span>}
     </button>
   );
 }

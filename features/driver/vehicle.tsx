@@ -26,7 +26,7 @@ export function Vehicle() {
   };
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <PageHeader title="Vehicle and documents" back="/drive" />
+      <PageHeader title="Vehicle and documents" back="/drive/profile" />
       <Card tone="primary" className="flex items-center gap-4 p-5"><CarArt className="w-28 shrink-0" /><div><p className="font-display text-xl font-extrabold">Toyota Corolla 2015</p><p className="text-sm font-semibold text-primary-fg/80">White · ABJ-482-KJ · 4 passenger seats</p></div></Card>
       <ul className="grid gap-2.5">
         {docs.map((d) => <li key={d.name}><Card className="flex items-center gap-3.5 p-3.5"><span className="grid size-11 place-items-center rounded-[0.875rem] bg-surface-sunken text-primary"><Icon name="doc" size={22} /></span><span className="flex-1 font-bold">{d.name}</span><Badge tone={tone[d.status]}>{label[d.status]}</Badge></Card></li>)}

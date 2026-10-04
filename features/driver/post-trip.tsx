@@ -8,6 +8,8 @@ import { Field, Switch } from "@/components/ui/form";
 import { Icon } from "@/components/ui/icon";
 import { Card } from "@/components/ui/primitives";
 import { formatNaira } from "@/lib/format";
+import { stopName } from "@/lib/data/stops";
+import { useAlerts } from "@/lib/store/alerts";
 import { useDriver } from "@/lib/store/driver";
 import { RoutePicker } from "@/features/rider/route-picker";
 import { cn } from "@/lib/cn";
@@ -15,6 +17,7 @@ import { cn } from "@/lib/cn";
 export function PostTrip() {
   const router = useRouter();
   const publish = useDriver((s) => s.publish);
+  const push = useAlerts((s) => s.push);
   const [route, setRoute] = useState({ from: "nyanya", to: "cbd" });
   const [time, setTime] = useState("07:10");
   const [seats, setSeats] = useState(4);
@@ -26,6 +29,7 @@ export function PostTrip() {
   const submit = () => {
     if (price < 500 || price > 5000) return setErr("Set a price between ₦500 and ₦5,000 per seat.");
     publish({ fromId: route.from, toId: route.to, time, seats, price, womenOnly: women, repeatWeekdays: repeat });
+    push("driver", { icon: "car", title: `Trip posted for ${time}`, body: `${stopName(route.from)} → ${stopName(route.to)} · ${seats} seats at ${formatNaira(price)}.` });
     router.push("/drive/live");
   };
   return (
