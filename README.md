@@ -38,7 +38,7 @@ Backend open items (SMS delivery, payments, real ID checks, migrations) are list
 
 Contributors List
 
-Name| Email| GitHub Username
+Name | Email | GitHub Username
 Abdulrahman Suleiman Adama | shabduladama@gmail.com| @johndoe
 Abdulrahman Yusufu 
 | yabdrahmanyus@gmail.com |
