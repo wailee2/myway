@@ -1,0 +1,11 @@
+{
+  "name": "MYWAY",
+  "short_name": "MYWAY",
+  "description": "Find someone already going your way. Shared rides across Abuja.",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fbf7ea",
+  "theme_color": "#ffc61a",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

@@ -1,11 +1,11 @@
-node_modules
-.next
-out
-build
+node_modules/
+.next/
+.venv/
+__pycache__/
+*.db
+.env
+.env.local
+.pytest_cache/
 *.tsbuildinfo
-next-env.d.ts
-.env*.local
-.DS_Store
-npm-debug.log*
 
 *old
