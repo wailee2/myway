@@ -38,13 +38,11 @@ Backend open items (SMS delivery, payments, real ID checks, migrations) are list
 
 Contributors List
 
-Name | Email | GitHub Username
-Abdulrahman Suleiman Adama | shabduladama@gmail.com| @johndoe
-Abdulrahman Yusufu 
-| yabdrahmanyus@gmail.com |
-Ayeni Oluwaferanmi | 9fernni@gmail.com | @wailee2
-Oladele jamiu adeyemi 
-| jamiuoladele70@gmail.com |
-Oni Omotoyosi Roseline | Onitoyosi51@gmail.com |
-Umoren Comfort Johnson | com4ortumoren@gmail.com | @Com4ort
-Yusuf Sada | malamiyusuf1@gmail.com | @Axzia
+Name| Email| GitHub Username
+Abdulrahman Suleiman Adama| shabduladama@gmail.com| @johndoe
+Abdulrahman Yusufu| yabdrahmanyus@gmail.com|
+Ayeni Oluwaferanmi| 9fernni@gmail.com| @wailee2
+Oladele jamiu adeyemi| jamiuoladele70@gmail.com|
+Oni Omotoyosi Roseline| Onitoyosi51@gmail.com|
+Umoren Comfort Johnson| com4ortumoren@gmail.com| @Com4ort
+Yusuf Sada| malamiyusuf1@gmail.com| @Axzia
