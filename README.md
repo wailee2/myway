@@ -35,3 +35,16 @@ Card and bank-transfer checkout are hidden (the backend only takes wallet and ca
 Set `NEXT_PUBLIC_LIVE_API=false` in `frontend/.env.local` to run the frontend alone with the old all-local behaviour. Demo sign-in code with the backend is `123456`.
 
 Backend open items (SMS delivery, payments, real ID checks, migrations) are listed in `backend/README.md`.
+
+Contributors List
+
+Name| Email| GitHub Username
+Abdulrahman Suleiman Adama | shabduladama@gmail.com| @johndoe
+Abdulrahman Yusufu 
+| yabdrahmanyus@gmail.com |
+Ayeni Oluwaferanmi | 9fernni@gmail.com | @wailee2
+Oladele jamiu adeyemi 
+| jamiuoladele70@gmail.com |
+Oni Omotoyosi Roseline | Onitoyosi51@gmail.com |
+Umoren Comfort Johnson | com4ortumoren@gmail.com | @Com4ort
+Yusuf Sada | malamiyusuf1@gmail.com | @Axzia
