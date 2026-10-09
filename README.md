@@ -40,6 +40,7 @@ Contributors List
 
 
 Name| Email| GitHub Username
+|---|---|---|
 Abdulrahman Suleiman Adama| shabduladama@gmail.com| @
 Abdulrahman Yusufu| yabdrahmanyus@gmail.com| 
 Ayeni Oluwaferanmi| 9fernni@gmail.com| @wailee2
